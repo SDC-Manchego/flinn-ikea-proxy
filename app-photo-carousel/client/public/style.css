@@ -1,0 +1,57 @@
+
+.mainPicNext-enter {
+  transform: translateX(564px);
+  position: absolute;
+}
+
+.mainPicNext-enter.mainPicNext-enter-active {
+  transform: translateX(0);
+  transition: all 300ms, linear 300ms;
+}
+
+.mainPicNext-exit {
+  opacity: 1;
+  transform: translateX(0);
+
+}
+
+.mainPicNext-exit.mainPicNext-exit-active {
+  opacity: 0;
+  transform: translateX(-564px);
+  transition: all 300ms linear;
+
+}
+
+
+.mainPicPrev-enter {
+  transform: translateX(-564px);
+  position: absolute;
+}
+
+.mainPicPrev-enter.mainPicPrev-enter-active {
+  transform: translateX(0);
+  transition: all 300ms, linear 300ms;
+}
+
+.mainPicPrev-exit {
+  opacity: 1;
+  transform: translateX(0);
+
+}
+
+.mainPicPrev-exit.mainPicPrev-exit-active {
+  opacity: 0;
+  transform: translateX(564px);
+  transition: all 300ms linear;
+
+}
+
+img:focus {
+  outline: 2px solid #666;
+}
+
+
+
+
+
+
