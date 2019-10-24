@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 // extra middleware to import
 const morgan = require('morgan');
@@ -12,13 +13,13 @@ const db = require('../database/index.js');
 // port to listen
 const port = 3001;
 
-//use middelware
+// use middelware
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static('client/public'));
 
-//enable CORS requests
+// enable CORS requests
 app.use(cors());
 
 app.get('/api/photos', (req, res) => {
@@ -31,4 +32,3 @@ app.get('/api/photos', (req, res) => {
 app.listen(port, () => {
   console.log(`listening on port: ${port}!`);
 });
-

@@ -1,3 +1,9 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable import/extensions */
+/* eslint-disable no-unused-vars */
 // importing react
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,7 +21,7 @@ import styles from './styles.js';
 import SmallCard from './smallcard.jsx';
 import Zoom from './zoom.jsx';
 
-class App extends React.Component {
+class PhotoCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +29,8 @@ class App extends React.Component {
       photos: [],
       zoomed: false,
       count: 0,
-      nextOrPrev: true
-    }
+      nextOrPrev: true,
+    };
     this.changeMainPic = this.changeMainPic.bind(this);
     this.toggle = this.toggle.bind(this);
     this.toggleZoom = this.toggleZoom.bind(this);
@@ -41,121 +47,115 @@ class App extends React.Component {
       success: (photos) => {
         this.setState({
           mainPic: photos[0],
-          photos: photos
+          photos,
         });
-      }
+      },
     });
   }
 
   changeMainPic(newMainPic) {
     this.setState({
-      mainPic: newMainPic
-    })
-  }
-
-  nextProp () {
-    const newIdx = this.state.mainPic.index+1;
-
-    this.setState({
-      mainPic: this.state.photos[newIdx],
-      count: newIdx,
-      nextOrPrev: true
+      mainPic: newMainPic,
     });
   }
 
-  prevProp () {
-    const newIdx = this.state.mainPic.index-1;
+  nextProp() {
+    const newIdx = this.state.mainPic.index + 1;
 
     this.setState({
       mainPic: this.state.photos[newIdx],
       count: newIdx,
-      nextOrPrev: false
+      nextOrPrev: true,
+    });
+  }
+
+  prevProp() {
+    const newIdx = this.state.mainPic.index - 1;
+
+    this.setState({
+      mainPic: this.state.photos[newIdx],
+      count: newIdx,
+      nextOrPrev: false,
     });
   }
 
   toggle(key) {
     const newCount = key;
 
-    if(newCount > this.state.count) {
+    if (newCount > this.state.count) {
       this.setState({
         count: newCount,
-        nextOrPrev: true
-      })
+        nextOrPrev: true,
+      });
     } else {
       this.setState({
         count: newCount,
-        nextOrPrev: false
-      })
+        nextOrPrev: false,
+      });
     }
   }
 
   toggleZoom() {
     const prevZoom = this.state.zoomed;
     this.setState({
-      zoomed: !prevZoom
-    })
+      zoomed: !prevZoom,
+    });
   }
 
-
   render() {
-    const zoomed = this.state.zoomed;
-    const nextOrPrev = this.state.nextOrPrev;
+    const { zoomed } = this.state;
+    const { nextOrPrev } = this.state;
 
-      return(
+    return (
+      <div>
         <div>
-          <div>
-            {zoomed ? (
-              <Zoom
-              toggleZoom={this.toggleZoom}
-              pics={this.state.photos}
-              />
-            ) : (
-          <div style={styles.productContainer}>
-          <div
-          style={styles.leftGroup}>
-          {this.state.photos.map((photo, i) =>
-            <SmallCard
-            changeMainPic={this.changeMainPic}
-            toggle={this.toggle}
-            pic={photo}
-            key={i}/>
-            )}
-          </div>
-            <button
-            style={styles.button}
-            onClick={() =>
-              this.prevProp()
-            }
-            disabled={this.state.mainPic.index === 0}
-            ><i className="fas fa-arrow-left"></i></button>
+          {zoomed ? (
+            <Zoom toggleZoom={this.toggleZoom} pics={this.state.photos} />
+          ) : (
+            <div style={styles.productContainer}>
+              <div style={styles.leftGroup}>
+                {this.state.photos.map((photo, i) => (
+                  <SmallCard
+                    changeMainPic={this.changeMainPic}
+                    toggle={this.toggle}
+                    pic={photo}
+                    key={i}
+                  />
+                ))}
+              </div>
+              <button
+                style={styles.button}
+                onClick={() => this.prevProp()}
+                disabled={this.state.mainPic.index === 0}
+              >
+                <i className="fas fa-arrow-left" />
+              </button>
               <TransitionGroup style={styles.slider}>
                 <CSSTransition
-                  in={ true }
-                  key= { this.state.count }
+                  in
+                  key={this.state.count}
                   timeout={900}
-                  classNames={ nextOrPrev ? "mainPicNext" : "mainPicPrev" }
-                  appear= { false }
+                  classNames={nextOrPrev ? 'mainPicNext' : 'mainPicPrev'}
+                  appear={false}
                 >
-                  <Card
-                   pic={this.state.mainPic}
-                   toggleZoom={this.toggleZoom}
-                   />
+                  <Card pic={this.state.mainPic} toggleZoom={this.toggleZoom} />
                 </CSSTransition>
               </TransitionGroup>
-            <button
-            style={styles.button}
-            onClick={() => this.nextProp()}
-            disabled={this.state.mainPic.index === this.state.photos.length-1}
-            ><i className="fas fa-arrow-right"></i></button>
-          </div>
-            )}
-          </div>
+              <button
+                style={styles.button}
+                onClick={() => this.nextProp()}
+                disabled={
+                  this.state.mainPic.index === this.state.photos.length - 1
+                }
+              >
+                <i className="fas fa-arrow-right" />
+              </button>
+            </div>
+          )}
         </div>
-      )
+      </div>
+    );
   }
 }
 
-
-
-export default App;
-
+export default PhotoCarousel;

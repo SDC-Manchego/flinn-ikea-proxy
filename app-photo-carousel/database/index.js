@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/photos');
 
 const db = mongoose.connection;
@@ -7,30 +9,26 @@ db.once('open', () => {
   console.log('Connected to mongoDB!');
 });
 
-
-let photoSchema = mongoose.Schema({
+const photoSchema = mongoose.Schema({
   product: String,
   index: Number,
   color: String,
-  image_url: String
+  image_url: String,
 });
 
-let Photos = mongoose.model('Photos', photoSchema);
+const Photos = mongoose.model('Photos', photoSchema);
 
-let getAllPhotos = (callback) => {
-  return Photos.find({}, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, result);
-    }
-  });
-};
-
-
+// eslint-disable-next-line max-len
+const getAllPhotos = (callback) => Photos.find({}, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
+  if (err) {
+    callback(err, null);
+  } else {
+    callback(null, result);
+  }
+});
 
 module.exports = {
   Photos,
   db,
-  getAllPhotos
-}
+  getAllPhotos,
+};

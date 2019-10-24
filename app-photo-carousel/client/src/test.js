@@ -1,32 +1,21 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
+/* eslint-disable no-unused-vars */
+
 // default imports for enzyme/jest to work
 import React from 'react';
+
 // enzyme methods used to test
 import Enzyme, { shallow, mount, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'regenerator-runtime/runtime';
+
 // different files to import and test
 import App from './app.jsx';
 import Card from './card.jsx';
 import SmallCard from './smallcard.jsx';
-// const $ = require('jquery');
-
-
-
-
-// jest.mock('$', () => {
-//   const exampleData = {
-//     color: "Hyllie dark gray",
-//     image_url: "https://davidfuentsmedia.s3-us-west-1.amazonaws.com/ikeaGrey1.webp",
-//     index: 0,
-//     product: "FRIHETEN",
-//     __v: 0,
-//     _id: "5da6065f3f62872d264391aa"
-//   }
-
-//   return {
-//     get: jest.fn(() => Promise.resolve(exampleData)),
-//   };
-// });
 
 // configure adapter for react 16
 Enzyme.configure({ adapter: new Adapter() });
@@ -46,21 +35,6 @@ describe('App Unit Tests', () => {
     expect(wrapper.state('photos')).toEqual([]);
   });
 
-  // jest.mock('$');
-  // it('should import data with getAllPhotos', () => {
-  //   const resp = {data: imageProps};
-  //   $.ajax.mockResolvedValue(resp);
-
-  //   return App.all().then(data => expect(data).toEqual(imageProps));
-  //   // const wrapper = shallow(<App />);
-  //   // const instance = wrapper.instance();
-
-  //   // expect(wrapper.state('mainPic')).toEqual('');
-  //   // instance.componentDidMount()
-
-
-  // });
-
   it('renders SmallCard to page', () => {
     const wrapper = shallow(<SmallCard pic={imageProps} />);
 
@@ -72,15 +46,14 @@ describe('App Unit Tests', () => {
 
     expect(wrapper.exists()).toBe(true);
   });
-
-
 });
 
 const imageProps = {
-  color: "Hyllie dark gray",
-  image_url: "https://davidfuentsmedia.s3-us-west-1.amazonaws.com/ikeaGrey1.webp",
+  color: 'Hyllie dark gray',
+  image_url:
+    'https://davidfuentsmedia.s3-us-west-1.amazonaws.com/ikeaGrey1.webp',
   index: 0,
-  product: "FRIHETEN",
+  product: 'FRIHETEN',
   __v: 0,
-  _id: "5da6065f3f62872d264391aa"
-}
+  _id: '5da6065f3f62872d264391aa',
+};
