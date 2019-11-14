@@ -10,7 +10,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use(express.static('public/lib'));
-app.use(proxy('/products', {target: 'http://ec2-3-15-164-226.us-east-2.compute.amazonaws.com:3002/'}));
+app.use(proxy('/products', {target: 'http://ip-172-31-30-21.us-east-2.compute.internal:3002/'}));
 app.listen(port, () => {
   console.log(`Server running at: http://localhost:${port}`);
 });
