@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon public/server.js"
+    "start": "node public/server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
     "morgan": "^1.9.1",
+    "newrelic": "^6.1.0",
     "nodemon": "^1.19.4",
     "path": "^0.12.7"
   }
