@@ -10,7 +10,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use(express.static('public/lib'));
-app.use(proxy('/products', {target: 'http://ip-172-31-30-21.us-east-2.compute.internal:3002/'}));
+app.use(proxy('/products', {target: 'http://172.31.47.148/'}));
 app.get('/loaderio-3246666d6c4e7b6899899354c7bee767', (req, res) => {
   res.send('loaderio-3246666d6c4e7b6899899354c7bee767');
 });
